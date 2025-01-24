@@ -41,11 +41,11 @@ export default function Surveys() {
     };
 
     const formik = {
-        initialValues: { surveyName: "" },
+        initialValues: { surveyName: "" , surveyDesc:""},
         validationSchema: addSurveyValidationSchema,
         onSubmit: async (values, { setErrors, resetForm }) => {
           try {
-            const param = { survey_name: values.surveyName };
+            const param = { survey_name: values.surveyName,surveyDesc: values.surveyDesc };
             const response = await apiCall(param, ADDSURVEY);
             showSuccessAlert("Survey added successfully:");
             setShowModal(false);
@@ -57,7 +57,7 @@ export default function Surveys() {
         },
     };
 
-    const { values, handleChange, handleBlur, handleSubmit, errors, touched,resetForm } =
+    const { values, handleChange, handleBlur, handleSubmit,setFieldValue, errors, touched,resetForm } =
     useFormik(formik);
     
     
@@ -79,6 +79,7 @@ export default function Surveys() {
     const formikEdit = useFormik({
         initialValues: {
           surveyName: selectedSurvey?.survey_name || "",
+          surveyDesc: selectedSurvey?.surveyDesc || "",
         },
         enableReinitialize: true,
         validationSchema: addSurveyValidationSchema,
@@ -87,6 +88,7 @@ export default function Surveys() {
             const params = {
               survey_code: selectedSurvey.survey_code,
               survey_name: values.surveyName,
+              surveyDesc: values.surveyDesc,
             };
             const response = await putConditionsApi(params, UPDATESURVEY);
             showSuccessAlert("Survey updated successfully:");
@@ -323,6 +325,26 @@ export default function Surveys() {
                             <div className="text-danger">{errors.surveyName}</div>
                         )}
                         </div>
+                        <div className="mb-3">
+                            <label className="form-label" htmlFor="survey-description">
+                            Survey Description
+                            </label>
+                            <div className="input-group input-group-merge">
+                            <textarea className="fs-13 mb-3 form-control length_count f-ht-70" 
+                                id="surveyDesc" 
+                                name="surveyDesc"
+                                rows="4" 
+                                cols="50"
+                                placeholder="Enter your address" 
+                                onChange={(e) => setFieldValue("surveyDesc", e.target.value)} 
+                                value={values.surveyDesc} 
+                                onBlur={handleBlur}
+                            />
+                            {touched.surveyDesc && errors.surveyDesc && (
+                                <div className="text-danger">{errors.surveyDesc}</div>
+                            )}
+                            </div>
+                        </div>
                     </form>
                     </PopUp>
                     <PopUp
@@ -359,6 +381,26 @@ export default function Surveys() {
                             {formikEdit.touched.surveyName && formikEdit.errors.surveyName && (
                             <div className="text-danger">{formikEdit.errors.surveyName}</div>
                             )}
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label" htmlFor="survey-description">
+                            Survey Description
+                            </label>
+                            <div className="input-group input-group-merge">
+                            <textarea className="fs-13 mb-3 form-control length_count f-ht-70" 
+                                id="surveyDesc" 
+                                name="surveyDesc"
+                                rows="4" 
+                                cols="50"
+                                placeholder="Enter your address" 
+                                onChange={(e) => setFieldValue("surveyDesc", e.target.value)} 
+                                value={values.surveyDesc} 
+                                onBlur={handleBlur}
+                            />
+                            {touched.surveyDesc && errors.surveyDesc && (
+                                <div className="text-danger">{errors.surveyDesc}</div>
+                            )}
+                            </div>
                         </div>
                         
                         </form>
