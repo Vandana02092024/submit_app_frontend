@@ -36,7 +36,7 @@ export default function Surveys() {
         setTotalPages(fetchedTotalPages);
 
         } catch (error) {
-        console.error("Failed to fetch surveys:", error);
+            showErrorAlert("Failed to fetch surveys:");
         }
     };
 
@@ -51,7 +51,6 @@ export default function Surveys() {
             setShowModal(false);
             resetForm();
           } catch (error) {
-            console.error("Failed to add survey:", error.message);
             showErrorAlert("Failed to add survey:");
           }
         },
@@ -210,8 +209,8 @@ export default function Surveys() {
                                                         <table className="table table-borderless">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>Question</th>
-                                                                    <th>Question Type</th>
+                                                                    <th>Survey Description</th>
+                                                                    {/* <th>Question Type</th> */}
                                                                     {/* <th>Status</th> */}
                                                                 </tr>
                                                             </thead>
@@ -219,9 +218,9 @@ export default function Surveys() {
                                                                 {survey.questions?.map((question, qIndex) => (
                                                                     <tr key={qIndex}>
                                                                         <td>{question.label}</td>
-                                                                        <td>
+                                                                        {/* <td>
                                                                             <strong>{question.type}</strong>
-                                                                        </td>
+                                                                        </td> */}
                                                                         {/* <td>
                                                                             <div className="form-check form-switch mb-2">
                                                                             <input

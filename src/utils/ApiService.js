@@ -16,8 +16,6 @@ import axios from "axios";
   } else {
     console.error("No user data found in localStorage");
   }
-  console.log('token',token)
-
 
   export const apiCall = async (data, endpoint) => {
     try {

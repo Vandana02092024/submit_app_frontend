@@ -16,7 +16,6 @@ export default function ForgotPassword() {
                 const param = {email:values.email}
                 const data = await apiCall(param, FORGOTPASSWORD);
               } catch (error) {
-                console.log("Login failed:", error.message);
                 setErrors({ apiError: error.message });
               }
         },

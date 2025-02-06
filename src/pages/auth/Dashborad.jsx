@@ -3,6 +3,7 @@ import { Layout } from "../../Layout/Layout";
 import { getApiCall, getConditionsApi } from '../../utils/ApiService';
 import { GETALLSURVEY, GETSURVEYDASHBOARD } from '../../utils/Endpoints';
 import { useNavigate } from "react-router-dom";
+import { showErrorAlert } from '../../utils/Sweetalert';
 
 export default function Dashboard() {
     const [selectedSurvey, setSelectedSurvey] = useState('');
@@ -28,7 +29,7 @@ export default function Dashboard() {
             setSelectedSurvey(formattedSurveys[0].survey_code);
         }
     } catch (error) {
-        console.error('Error fetching active surveys:', error);
+         showErrorAlert('Error fetching active surveys:');
     }
     };
 
@@ -42,7 +43,7 @@ export default function Dashboard() {
                     const response = await getApiCall(params,GETSURVEYDASHBOARD); 
                     SetSurveyDashboard(response.data.data);
                 } catch (error) {
-                    console.error("Failed to fetch survey questions:", error);
+                    showErrorAlert("Failed to fetch survey questions:");
                 }
             };
             fetchSurveysDataDashboard();

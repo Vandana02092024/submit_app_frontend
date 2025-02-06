@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { getApiCall, getConditionsApi, putConditionsApi } from '../../utils/ApiService';
 import { GETALLSURVEYQUESTIONS, GETALLSURVEYS, UPDATEQUESTIONSTATUS } from '../../utils/Endpoints';
 import PopUp from './PopUp';
-import { showWarningAlert } from '../../utils/Sweetalert';
+import { showErrorAlert, showWarningAlert } from '../../utils/Sweetalert';
 
 export default function Questions() {
     const [surveys, setSurveys] = useState([]);
@@ -35,7 +35,7 @@ export default function Questions() {
             setSelectedSurvey(formattedSurveys[0].survey_code);
         }
     } catch (error) {
-        console.error('Error fetching active surveys:', error);
+        showErrorAlert("Error fetching active surveys:")
     }
     };
 
@@ -60,7 +60,7 @@ export default function Questions() {
                     setSurveysData(response.data.data);
                     setTotalPages(fetchedTotalPages);
                 } catch (error) {
-                    console.error("Failed to fetch survey questions:", error);
+                    showErrorAlert("Failed to fetch survey questions:")
                 }
             };
             fetchSurveysQuestions();
@@ -92,7 +92,7 @@ export default function Questions() {
                 const response = await putConditionsApi(payload, UPDATEQUESTIONSTATUS);
             }
             catch (error) {
-                console.error("Error deleting option:", error);
+                showErrorAlert("Error deleting option:")
             }
         }
     }

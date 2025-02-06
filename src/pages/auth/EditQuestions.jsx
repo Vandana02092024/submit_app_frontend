@@ -39,7 +39,7 @@ function EditQuestions() {
             : []
         );
         } catch (error) {
-            console.error('Error fetching active surveys:', error);
+            showErrorAlert('Error fetching active surveys:');
         }
     };
 
@@ -93,7 +93,6 @@ function EditQuestions() {
             resetForm();
             setOptions([""]);
         } catch (error) {
-            console.error('Error updating survey question:', error);
             showErrorAlert('Something went wrong while updating the survey question!');
         }
         },
@@ -117,7 +116,7 @@ function EditQuestions() {
                 const response = await putConditionsApi(payload, UPDATEOPTIONSTATUS);
             }
             catch (error) {
-                console.error("Error deleting option:", error);
+                showErrorAlert("Error deleting option:");
             }
         }
         const updatedOptions = options.filter((_, i) => i !== index);

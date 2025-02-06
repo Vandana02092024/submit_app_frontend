@@ -54,7 +54,7 @@ function AddQuestions() {
             options:[],
         },
         validationSchema:addQuestions,
-        onSubmit: async (values, { setErrors, resetForm }) => {
+        onSubmit: async (values, { resetForm }) => {
           try {
             const param = {
                 survey_code:survey_code,
@@ -75,7 +75,6 @@ function AddQuestions() {
             setOptions([""]);
             setIsRequired(false);
           } catch (error) {
-            console.error("Failed to add survey questions:", error.message);
             showErrorAlert("Failed to add survey questions:");
           }
         },

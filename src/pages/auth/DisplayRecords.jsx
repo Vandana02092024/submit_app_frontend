@@ -4,6 +4,7 @@ import { useLocation} from "react-router-dom";
 import { getApiCall } from '../../utils/ApiService';
 import { GETALLCOUNTBYRESPONSES } from '../../utils/Endpoints';
 import { Table } from "react-bootstrap";
+import { showErrorAlert } from '../../utils/Sweetalert';
 
 export default function DisplayRecords() {
      const location = useLocation();
@@ -24,7 +25,7 @@ export default function DisplayRecords() {
             const response = await getApiCall(params,GETALLCOUNTBYRESPONSES); 
             SetRecords(response.data.data);
         } catch (error) {
-            console.error("Failed to fetch survey questions:", error);
+            showErrorAlert("Failed to fetch survey questions:");
         }
     };
 

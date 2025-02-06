@@ -18,7 +18,6 @@ export default function SignUp() {
                 const data = await apiCall(param, SIGNUP);
                 alert("you have successfully signup ");
               } catch (error) {
-                console.log("signup failed:", error.message);
                 setErrors({ apiError: error.message });
               }
         },

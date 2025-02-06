@@ -17,7 +17,6 @@ const SurveyModal = ({ showModal, handleClose }) => {
         const { data } = response; 
         handleClose(); 
       } catch (error) {
-        console.log("not added:", error.message);
         setErrors({ apiError: error.message });
       }
     },

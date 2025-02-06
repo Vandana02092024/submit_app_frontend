@@ -37,7 +37,7 @@ export default function Users() {
         setTotalPages(fetchedTotalPages);
 
         } catch (error) {
-        console.error("Failed to fetch users:", error);
+            showErrorAlert("Failed to fetch users:")
         }
     };
 
@@ -57,7 +57,6 @@ export default function Users() {
             setShowModal(false);
             resetForm();
           } catch (error) {
-            console.error("Failed to add user:", error.message);
             showErrorAlert("Failed to add user:");
           }
         },
@@ -117,7 +116,6 @@ export default function Users() {
                     showErrorAlert("Failed to update status!");
                 }
             } catch (error) {
-                console.error("Error updating status:", error);
                 showErrorAlert("Something went wrong while updating the status!");
             }
         }
